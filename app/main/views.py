@@ -1,9 +1,9 @@
 from flask import render_template
 from . import main
-from flask_login import login_required
+# from flask_login import login_required
 
 @main.route("/",methods = ['GET','POST'])
-@login_required
+# @login_required
 def index():
     title="Home"
     return render_template("index.html",title=title)
