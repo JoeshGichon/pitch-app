@@ -45,3 +45,6 @@ class Pitches(db.Model):
     date_posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
+    def __repr__(self):
+        return f'Pitches {self.id}'
+
