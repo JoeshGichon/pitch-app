@@ -19,13 +19,16 @@ def new_pitch():
         title = form.title.data
         author = form.author.data
         content = form.content.data
-        date_posted = form.date_posted.data
-        new_pitch = Pitches(title,author,content,date_posted,)
-        new_pitch.save_pitch()
 
+        new_pitch = Pitches(title,author,content)
+
+        new_pitch.save_pitches()
+        
+
+    pitchess = Pitches.get_pitches()
 
     title = "pitches"
-    return render_template('pitches.html',title = title, pitch_form=form)
+    return render_template('pitches.html',title = title, pitch_form=form,pitchess=pitchess)
 
 @main.route('/comments', methods = ['GET','POST'])
 def new_comment():
@@ -33,9 +36,14 @@ def new_comment():
 
     if form.validate_on_submit():
         comment= form.comment.data
-        new_comment = Comments(comment)
-        new_comment.save_pitch()
+        author=form.author.data
+
+        new_comment = Comments(comment,author)
+
+        new_comment.save_comment()
+
+    commentss = Comments.get_comments()
 
     title = "comments"
-    return render_template('comments.html',title = title, comment_form=form)
+    return render_template('comments.html',title = title, comment_form=form,commentss=commentss)
 

@@ -1,0 +1,21 @@
+<!-- Displaying pitches macro -->
+{% macro displayPitches(pitches_list) %}
+    {% for pitch in pitches_list %}
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 review-card">
+        <h1> {{ pitch.title }} </h1>
+        <h2> {{ pitch.author }}</h2>
+        <p>{{ pitch.content }}</p>
+    </div>
+    {% endfor %}
+{% endmacro %}
+
+
+<!-- Displaying comments macro -->
+{% macro displayComments(comment_list) %}
+    {% for comment in comment_list %}
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 review-card">
+        <p> {{ comment.comment }} </p>
+        <h2> {{ comment.author }}</h2>
+    </div>
+    {% endfor %}
+{% endmacro %}

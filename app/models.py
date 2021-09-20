@@ -16,7 +16,6 @@ class User(UserMixin,db.Model):
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
-    pitches = db.relationship('Review',backref = 'user',lazy = "dynamic")
     password_hash = db.Column(db.String(255))
 
     pass_secure  = db.Column(db.String(255))
@@ -39,14 +38,12 @@ class Pitches(db.Model):
 
     all_pitches = []
 
-    def __init__(self,title,author,content,date_posted,):
+    def __init__(self,title,author,content):
         self.title = title
         self.author = author
         self.content = content
-        self.date_posted = date_posted
 
-
-    def save_review(self):
+    def save_pitches(self):
         Pitches.all_pitches.append(self)
 
 
@@ -61,11 +58,13 @@ class Pitches(db.Model):
     author = db.Column(db.String(50),nullable=False,default="N/A")
     content = db.Column(db.Text,nullable=False)
     date_posted = db.Column(db.DateTime,default=datetime.utcnow)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
-    def save_pitch(self):
-        db.session.add(self)
-        db.session.commit()
+    # def save_pitch(self):
+    #     db.session.add(self)
+    #     db.session.commit()
+
+    def save_pitches(self):
+        Pitches.all_pitches.append(self)
 
     @classmethod
     def get_pitches(cls,id):
@@ -80,15 +79,15 @@ class Pitches(db.Model):
         return response
 
     def __repr__(self):
-        return f'Pitches {self.id}'
+        return f'Pitches {self.content,self.author,self.title}'
 
-class Comments:
+class Comments():
 
     all_comments = []
 
-    def __init__(self,comment_id,comment):
-        self.comment_id = comment_id
+    def __init__(self,comment,author):
         self.comment = comment
+        self.author = author
 
     def save_comment(self):
         Comments.all_comments.append(self)
@@ -105,5 +104,5 @@ class Comments:
         return response
 
     def __repr__(self):
-        return f'Comments {self.id}'
+        return f'Comments {self.comment,self.author}'
 
