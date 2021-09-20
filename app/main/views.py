@@ -2,11 +2,9 @@ from flask import render_template
 from . import main
 from ..models import Pitches,Comments
 from .forms import PitchForm,CommentForm
-
-# from flask_login import login_required
+from flask_login import login_required
 
 @main.route("/")
-# @login_required
 def index():
     title="Home"
     return render_template("index.html",title=title)
@@ -31,6 +29,7 @@ def new_pitch():
     return render_template('pitches.html',title = title, pitch_form=form,pitchess=pitchess)
 
 @main.route('/comments', methods = ['GET','POST'])
+@login_required
 def new_comment():
     form = CommentForm()
 
