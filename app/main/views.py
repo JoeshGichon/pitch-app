@@ -1,6 +1,6 @@
-from flask import render_template
+from flask import render_template,request,redirect,url_for,abort
 from . import main
-from ..models import Pitches,Comments
+from ..models import Pitches,Comments,User
 from .forms import PitchForm,CommentForm
 from flask_login import login_required
 
