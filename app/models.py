@@ -82,3 +82,28 @@ class Pitches(db.Model):
     def __repr__(self):
         return f'Pitches {self.id}'
 
+class Comments:
+
+    all_comments = []
+
+    def __init__(self,comment_id,comment):
+        self.comment_id = comment_id
+        self.comment = comment
+
+    def save_comment(self):
+        Comments.all_comments.append(self)
+
+    @classmethod
+    def clear_comments(cls):
+        Comments.all_comments.clear()
+
+    @classmethod
+    def get_comments(cls):
+        response = []
+        for comment in cls.all_comments:
+            response.append(comment)
+        return response
+
+    def __repr__(self):
+        return f'Comments {self.id}'
+
