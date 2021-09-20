@@ -8,7 +8,7 @@ The above named project is a full stack application that enable user to post the
 
 ## Project Link
 Below is the project deployed link:
-
+https://jpitchapp.herokuapp.com/
 
 # Setup/Installation Requirements
 * HTML
